@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>JS-Lesson-1-1</title>
+	<style>
+		*{outline: none;margin: 0;padding: 0;}
+		body{font-size: 12px;}
+		.box{
+			margin: 50px auto;
+			border: 5px solid #666;
+			width: 240px;
+			height: 400px;
+		}
+		#list{
+			height: 360px;
+		}
+		#list p{
+			padding: 5px 5px 0;
+		}
+		#list p.even{text-align: right;}
+		#list p img{
+			display: inline-block;
+			margin: 3px;
+			border: 1px solid #999;
+			border-radius: 5px;
+			padding: 2px;
+			width: 24px;
+			height: 24px;
+			cursor: pointer;
+			vertical-align: top;
+		}
+		#list p span{
+			display: inline-block;
+			max-width: 176px;
+			margin: 3px;
+			border-radius: 5px;
+			padding: 6px;
+			line-height: 18px;
+			background-color: #DED6E7;
+			vertical-align: top;
+			word-wrap: break-word;
+		}
+		#list p.even span{background-color: #21C618;color: #fff;text-align: left;}
+		#inputbox{
+			border-top: 1px solid #999;
+			padding: 5px;
+			height: 29px;
+		}
+		#inputbox img{
+			display: inline-block;
+			border: 1px solid #999;
+			border-radius: 3px;
+			padding: 2px;
+			width: 23px;
+			height: 23px;
+			cursor: pointer;
+			vertical-align: middle;
+		}
+		#inputtext{
+			border: 1px solid #999;
+			border-radius: 3px;
+			padding: 0 5px;
+			width: 130px;
+			height: 27px;
+			line-height: 27px;
+			vertical-align: middle;
+			font-size: 12px;
+		}
+		#submit{
+			border: 0;
+			width: 42px;
+			height: 27px;
+			background-color: #fff;
+			vertical-align: middle;
+			cursor: pointer;
+		}
+	</style>
+	<script>
+	window.onload = function(){
+		(function(){
+
+			function getId(id){
+				return document.getElementById(id);
+			}
+			var oList = getId('list');
+			var oInputtext = getId('inputtext');
+			var oSubmit = getId('submit');
+			var oFace = getId('face');
+			var flag = true;
+			var str = '';
+
+			oFace.onclick = function(){
+				if(flag){
+					this.src = 'img/face2.png';
+					flag = false;
+				}else{
+					this.src = 'img/face1.png';
+					flag = true;
+				}
+			};
+
+			oSubmit.onclick = function(){
+				if(oInputtext.value == ''){
+					alert('客官，说点什么吧！');
+				}else{
+					if(flag){
+						str += '<p><img src="'+ oFace.src +'" alt=""/><span>'+ oInputtext.value +'</span></p>';
+					}else{
+						str += '<p class="even"><span>'+ oInputtext.value +'</span><img src="'+ oFace.src +'" alt=""/></p>';
+					}
+					oList.innerHTML = str;
+					oInputtext.value = '';
+				}
+			};
+
+		})();
+	};
+	</script>
+</head>
+<body>
+<div class="box">
+	<div id="list">
+		<!--<p><img src="img/face1.png" alt=""/><span>透明度在JS中如何设置可以让IE都能够兼容？</span></p>-->
+		<!--<p><span>透明度在JS中如何设置可以让IE都能够兼容？</span><img src="img/face2.png" alt=""/></p>-->
+	</div>
+	<div id="inputbox">
+		<img src="img/face1.png" alt="" id="face"/>
+		<input type="text" value="" placeholder="选头像、输文字、点发送" id="inputtext"/>
+		<input type="button" value="发送" id="submit"/>
+	</div>
+</div>
+</body>
+</html>
