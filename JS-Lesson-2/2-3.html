@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-Lesson-2-2</title>
+  <style>
+    body{background-color:#eee}
+    div{margin:0;padding:0;position:absolute;width:50px;height:50px;background-color:#f00;}
+  </style>
+  <script>
+    window.onload = function(){
+      (function(){
+        var len = 9,
+          iCen = Math.floor(len/2),
+          str = '';
+
+        for(var i=0; i<len; i++){
+          if(i<iCen){
+            str += '<div style="left:' + i%len*50 + 'px;top:' + i%iCen*50 + 'px;"></div>';
+          }else{
+            str += '<div style="left:' + i%len*50 + 'px;top:' + (len-1-i)*50 + 'px;"></div>';
+          }
+        }
+        document.body.innerHTML = str;
+      })();
+    };
+  </script>
+</head>
+<body>
+</body>
+</html>
