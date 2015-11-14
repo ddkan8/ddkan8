@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    img{
+      position: absolute;
+      left: 50%;
+      top:100px;
+      margin-left: -90px;
+      width: 180px;
+    }
+  </style>
+  <script src="miaov.js"></script>
+  <script>
+    window.onload = function(){
+
+      var oImg = document.getElementsByTagName('img')[0],
+          arr = [],
+          iNum = 0;
+
+      for(var i=20; i>0; i-=2){
+        arr.push(i, -i);
+      }
+      arr.push(0);
+
+      oImg.onmousemove = function(){
+        clearInterval(oImg.timer2);
+        oImg.timer2 = setInterval(function(){
+          oImg.style.left = parseInt(getStyle(oImg, 'left')) + arr[iNum] + 'px';
+          iNum++;
+          if(iNum == arr.length){
+            clearInterval(oImg.timer2);
+            iNum = 0;
+          }
+        }, 50);
+
+      };
+
+    };
+  </script>
+</head>
+
+<body>
+<img src="img/3.jpg" alt=""/>
+</body>
+</html>
