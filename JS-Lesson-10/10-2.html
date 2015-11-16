@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		html, body, ul {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+			display: inline-block;
+			width: 50px;
+			height: 70px;
+			position: relative;
+			overflow: hidden;
+		}
+		img {
+			border: 0;
+			width: 50px;
+			height: 70px;
+		}
+		ul {
+			margin: 50px auto;
+			width: 400px;
+			font-size: 0;
+		}
+		li div {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+	<script src="miaov.js"></script>
+	<script>
+		window.onload = function(){
+
+			var oUl = document.getElementById('time'),
+				  aLi = oUl.getElementsByTagName('li');
+
+			function fnTime(){
+
+				var oTime = new Date(),
+					iYear = oTime.getFullYear(),
+					iMonth = oTime.getMonth() + 1,  //一月份从0开始计算
+					iDate = oTime.getDate(),
+					iDay = oTime.getDay(),
+					iHours = oTime.getHours(),
+					iMinutes = oTime.getMinutes(),
+					iSeconds = oTime.getSeconds(),
+					str = '';
+
+				switch (iDay) {
+					case 1 :
+						iDay = '星期一';
+						break;
+					case 2 :
+						iDay = '星期二';
+						break;
+					case 3 :
+						iDay = '星期三';
+						break;
+					case 4 :
+						iDay = '星期四';
+						break;
+					case 5 :
+						iDay = '星期五';
+						break;
+					case 6 :
+						iDay = '星期六';
+						break;
+					default :
+						iDay = '星期日';
+						break;
+				}
+
+				str = toTwo(iHours) + ':' + toTwo(iMinutes) + ':' + toTwo(iSeconds);
+
+				for(var i=0; i<aLi.length; i++){
+					fnFlip(aLi[i], i);
+				}
+
+				function fnFlip(el, index){
+
+					var oDiv = el.getElementsByTagName('div')[0],
+					    aImg = oDiv.getElementsByTagName('img');
+
+					if(str.charAt(index) == ':'){
+						aImg[0].src = '10-img/colon.jpg';
+						setTimeout(function(){
+							aImg[0].src = '10-img/colon2.jpg';
+						}, 500);
+					}else{
+						aImg[1].src = '10-img/' + str.charAt(index) + '.jpg';
+						if(aImg[0].src != aImg[1].src){
+							doMove(oDiv, 'top', 10, -70, function(){
+								aImg[0].src = aImg[1].src;
+								oDiv.style.top = 0 + 'px';
+							});
+						}
+
+					}
+
+				}
+
+
+			}
+
+			function toTwo(n){
+				return n < 10 ? '0' + n : '' + n;
+			}
+
+			setInterval(fnTime, 1000);
+			fnTime();
+		};
+	</script>
+</head>
+<body>
+<ul id="time">
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/colon.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/colon.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+	<li>
+		<div>
+			<img src="10-img/0.JPG" alt=""/>
+			<img src="10-img/0.JPG" alt=""/>
+		</div>
+	</li>
+</ul>
+</body>
+</html>

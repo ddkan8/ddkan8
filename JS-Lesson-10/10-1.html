@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<script>
+		window.onload = function(){
+
+			var oDIv1 = document.getElementById('div1'),
+			    oDIv2 = document.getElementById('div2'),
+			    aImg = oDIv2.getElementsByTagName('img');
+
+			function fnTime(){
+
+				var oTime = new Date(),
+				    iYear = oTime.getFullYear(),
+				    iMonth = oTime.getMonth() + 1,  //一月份从0开始计算
+				    iDate = oTime.getDate(),
+				    iDay = oTime.getDay(),
+				    iHours = oTime.getHours(),
+				    iMinutes = oTime.getMinutes(),
+				    iSeconds = oTime.getSeconds(),
+				    str = '',
+				    str2 = '';
+
+				switch (iDay) {
+					case 1 :
+						iDay = '星期一';
+						break;
+					case 2 :
+						iDay = '星期二';
+						break;
+					case 3 :
+						iDay = '星期三';
+						break;
+					case 4 :
+						iDay = '星期四';
+						break;
+					case 5 :
+						iDay = '星期五';
+						break;
+					case 6 :
+						iDay = '星期六';
+						break;
+					default :
+						iDay = '星期日';
+						break;
+				}
+
+				str = iYear + '年' + toTwo(iMonth) + '月' + toTwo(iDate) + '日 ' + iDay + ' ' + toTwo(iHours) + ':' + toTwo(iMinutes) + ':' + toTwo(iSeconds);
+
+				str2 = toTwo(iHours) + toTwo(iMinutes) + toTwo(iSeconds);
+
+				aImg[0].src = '10-img/' + str2.charAt(0) +'.jpg',
+				aImg[1].src = '10-img/' + str2.charAt(1) +'.jpg',
+				aImg[3].src = '10-img/' + str2.charAt(2) +'.jpg',
+				aImg[4].src = '10-img/' + str2.charAt(3) +'.jpg',
+				aImg[6].src = '10-img/' + str2.charAt(4) +'.jpg',
+				aImg[7].src = '10-img/' + str2.charAt(5) +'.jpg';
+
+				oDIv1.innerHTML = str;
+
+			}
+
+			function toTwo(n){
+				return n < 10 ? '0' + n : '' + n;
+			}
+
+			setInterval(fnTime, 1000);
+			fnTime();
+		};
+	</script>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2">
+	<img src="10-img/0.JPG" alt=""/>
+	<img src="10-img/0.JPG" alt=""/>
+	<img src="10-img/colon.JPG" alt=""/>
+	<img src="10-img/0.JPG" alt=""/>
+	<img src="10-img/0.JPG" alt=""/>
+	<img src="10-img/colon.JPG" alt=""/>
+	<img src="10-img/0.JPG" alt=""/>
+	<img src="10-img/0.JPG" alt=""/>
+</div>
+</body>
+</html>
