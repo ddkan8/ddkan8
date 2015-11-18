@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		*{margin: 0;padding: 0;}
+		body{background-color: #EFEFE7;}
+		#wrap{
+			position: relative;
+			margin: 50px auto;
+			width: 800px;
+		}
+		p{
+			padding: 50px;
+			width: 600px;
+			line-height: 36px;
+			font-size: 22px;
+			font-family: "Microsoft YaHei";
+			background-color: #fff;
+		}
+		#buttons{
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100px;
+		}
+		#buttons a{
+			display: none;
+			margin-bottom: 5px;
+			height: 40px;
+			line-height: 40px;
+			color: #fff;
+			text-align: center;
+			background-color: #C0C0C0;
+			text-decoration: none;
+			font-weight: bold;
+			font-family: '微软雅黑';
+			font-size: 20px;
+		}
+		#buttons a:hover{
+			background-color: #E76308;
+		}
+		#buttons a:first-child{
+			display: block;
+			background-color: #94948C;
+		}
+		#toolbox {
+			border: 10px solid #E71063;
+			width: 640px;
+			padding: 20px;
+			background: #E7E7B5;
+			font-size: 0;
+			display: none;
+			position: relative;
+		}
+		#toolbox span {
+			font-family: '微软雅黑';
+			font-size: 20px;
+			padding: 5px 20px;
+			cursor: pointer;
+		}
+		#toolbox span.active {
+			background: #E73100;
+			color: #fff;
+		}
+		#find, #replace {
+			display: none;
+			border-top: 3px solid #F7634A;
+			margin-top: 3px;
+		}
+		#find input[type="text"], #replace input[type="text"] {
+			margin: 20px 0px;
+			padding: 2px;
+			height: 24px;
+			width: 200px;
+			font-size: 24px;
+			margin-right: 10px;
+		}
+		#find input[type="button"], #replace input[type="button"] {
+			margin: 20px 0;
+			height: 30px;
+			width: 56px;
+			font-size: 20px;
+		}
+		#close {
+			font-size: 24px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			cursor: pointer;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+
+			var oWrap = document.getElementById('wrap'),
+			    oP = oWrap.getElementsByTagName('p')[0],
+			    aBtn = document.getElementById('buttons').getElementsByTagName('a'),
+			    oToolbox = document.getElementById('toolbox'),
+			    oClose = document.getElementById('close'),
+			    oFind = document.getElementById('find'),
+			    oReplace = document.getElementById('replace'),
+			    aSpan = oToolbox.getElementsByTagName('span'),
+			    oFindInput = oFind.getElementsByTagName('input')[0],
+			    oFindBtn = oFind.getElementsByTagName('input')[1],
+			    oReplaceInput1 = oReplace.getElementsByTagName('input')[0],
+			    oReplaceInput2 = oReplace.getElementsByTagName('input')[1],
+			    oReplaceBtn = oReplace.getElementsByTagName('input')[2],
+			    str = oP.innerHTML;
+
+			aBtn[0].onclick = function(){
+				aBtn[1].style.display = 'block';
+				aBtn[2].style.display = 'block';
+				return false;
+			};
+
+			aBtn[1].onclick = function(){
+				clearBtns();
+				findShow();
+				return false;
+			};
+			aBtn[2].onclick = function(){
+				clearBtns();
+				replaceShow();
+				return false;
+			};
+			aSpan[0].onclick = findShow;
+			aSpan[1].onclick = replaceShow;
+			oClose.onclick = function(){
+				oToolbox.style.display = 'none';
+			};
+			oFindBtn.onclick = function(){
+				if(oFindInput.value == ''){
+					alert('请输入要查找的内容！');
+				}else{
+					if(str.indexOf(oFindInput.value) == -1){
+						alert('没有找到你输入的' + oFindInput.value);
+						oP.innerHTML = str;
+						oFindInput.value = '';
+					}else{
+						oP.innerHTML = str;
+						var arr = str.split(oFindInput.value);
+						oP.innerHTML = arr.join('<span style="background-color:yellow;">' + oFindInput.value + '</span>');
+						oFindInput.value = '';
+					}
+				}
+			};
+			oReplaceBtn.onclick = function(){
+				if(oReplaceInput1.value == ''){
+					alert('请输入要查找的内容！');
+				}else{
+					if(str.indexOf(oReplaceInput1.value) == -1){
+						alert('没有找到你输入的' + oReplaceInput1.value);
+						oP.innerHTML = str;
+						oReplaceInput1.value = '';
+					}else{
+						if(oReplaceInput2.value == ''){
+							if(!confirm('你确定要删除输入的内容吗？')){
+								oReplaceInput1.value = '';
+								return true;
+							}
+						}
+
+						oP.innerHTML = str;
+						var arr = str.split(oReplaceInput1.value);
+						oP.innerHTML = arr.join(oReplaceInput2.value);
+						str = oP.innerHTML;
+						oReplaceInput1.value = '';
+						oReplaceInput2.value = '';
+					}
+				}
+			};
+
+			function clearBtns(){
+				aBtn[1].style.display = 'none';
+				aBtn[2].style.display = 'none';
+				oToolbox.style.display = 'block';
+			}
+
+			function findShow(){
+				oP.innerHTML = str;
+				aSpan[0].className = 'active';
+				aSpan[1].className = '';
+				oFind.style.display = 'block';
+				oReplace.style.display = 'none';
+			}
+
+			function replaceShow(){
+				oP.innerHTML = str;
+				aSpan[1].className = 'active';
+				aSpan[0].className = '';
+				oReplace.style.display = 'block';
+				oFind.style.display = 'none';
+			}
+
+		};
+	</script>
+</head>
+
+<body>
+<div id="wrap">
+	<p>妙味课堂是一支充满温馨并且极富人情味的IT培训团队；2010-2011年，妙味深度关注WEB前端开发领域，为此精心研发出一套灵活而充满趣味的JavaScript课程。2011-2013年，妙味精准研发出最新HTML5\CSS3课程，并推出远程培训课程方案，尝试将线下优良的培训模式移植到远程网络培训中，希望尽最大努力，将一种快乐愉悦的授课体验、结合HTML\CSS\JS知识点，精准传递给妙味课堂的每一位学员。</p>
+	<div id="buttons">
+		<a href="">展开</a>
+		<a href="">查找</a>
+		<a href="">替换</a>
+	</div>
+	<div id="toolbox">
+		<div id="close">×</div>
+		<span>查找</span>
+		<span>替换</span>
+		<div id="find">
+			<input type="text"><input type="button" value="查找">
+		</div>
+		<div id="replace">
+			<input type="text"><input type="text">
+			<input type="button" value="替换">
+		</div>
+	</div>
+</div>
+</body>
+</html>
