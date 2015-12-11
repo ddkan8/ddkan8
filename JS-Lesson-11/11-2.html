@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文字搬运工</title>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			background: #C0C0C0;
+		}
+		#wrapper {
+			margin: 50px auto;
+			width: 800px;
+			background: #fff;
+			overflow: hidden;
+			padding: 20px;
+			border-radius: 10px;
+		}
+		textarea {
+			background: #EFEFD6;
+			border: none;
+			width: 320px;
+			height: 220px;
+			float: left;
+			padding: 10px;
+			font-size: 18px;
+		}
+		#right {
+			width: 320px;
+			height: 220px;
+			background: #63EFF7;
+			float: right;
+			padding: 10px;
+		}
+		#center {
+			float: left;
+			width: 120px;
+			text-align: center;
+		}
+		#center a {
+			display: block;
+			color: #fff;
+			background: #F76300;
+			text-decoration: none;
+			padding: 10px;
+			margin: 0 5px;
+			font-family: '微软雅黑';
+		}
+		#center p {
+			font-size: 20px;
+			font-family: '微软雅黑';
+		}
+		#center ul {
+			display: none;
+			margin: 0;
+			padding: 0;
+			font-size: 0;
+		}
+		li {
+			list-style: none;
+			display: inline-block;
+			width: 8px;
+			height: 10px;
+			background: #E7A521;
+			margin: 2px;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+
+			var oWrapper = document.getElementById('wrapper'),
+			    oBtn = oWrapper.getElementsByTagName('a')[0],
+			    oLeft = document.getElementById('left'),
+			    oRight = document.getElementById('right'),
+			    oCurrent = document.getElementById('current'),
+			    oAll = document.getElementById('all'),
+			    oProgress = document.getElementById('progress'),
+			    aLi = oProgress.getElementsByTagName('li');
+
+			oBtn.onclick = function(){
+				if(oLeft.value == ''){
+					alert('请在左边输入内容');
+					return;
+				}
+
+				var str = oLeft.value,
+				    arrText = str.split(''),
+				    iNum = n = 0;
+
+				oAll.innerHTML = arrText.length;
+				oCurrent.innerHTML = 0;
+				oRight.innerHTML = '';
+				oProgress.style.display = 'block';
+
+				oWrapper.timer = setInterval(function(){
+					oLeft.value = oLeft.value.substring(1);
+					oRight.innerHTML += arrText[iNum];
+					iNum++;
+					oCurrent.innerHTML = iNum;
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].style.backgroundColor = '#E7A521';
+					}
+					aLi[n].style.backgroundColor = 'red';
+					n++;
+					if(n == aLi.length){
+						n = 0;
+					}
+					if(iNum == arrText.length){
+						clearInterval(oWrapper.timer);
+						oLeft.value = '';
+						oProgress.style.display = 'none';
+					}
+				}, 80);
+
+			};
+		};
+	</script>
+</head>
+
+<body>
+<div id="wrapper">
+	<textarea id="left"></textarea>
+	<div id="center">
+		<a href="javascript:">把文字右移</a>
+		<p><span id="current">0</span>/<span id="all">0</span></p>
+		<ul id="progress">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<div id="right"></div>
+</div>
+</body>
+</html>

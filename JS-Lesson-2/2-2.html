@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS-Lesson-2-2</title>
+  <style>
+    body{background-color:#eee}
+    div{margin:0;padding:0;position:absolute;width:50px;height:50px;line-height:50px;text-align:center;}
+  </style>
+  <script>
+    window.onload = function(){
+      (function(){
+        var len = 100,
+          str = '',
+          arrColor = ['#68B6EE', '#F0EB8E', '#75E17A', '#764D91'];
+
+        for(var i=0; i<len; i++){
+
+          str += '<div style="left:' + i%10*60 + 'px;top:' + Math.floor(i/10)*60 + 'px;background-color:' + arrColor[i%arrColor.length] + ';">' + i + '</div>';
+
+        }
+        document.body.innerHTML = str;
+      })();
+    };
+  </script>
+</head>
+<body>
+
+</body>
+</html>

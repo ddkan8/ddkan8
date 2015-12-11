@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		body { background:#f1f1f1; }
+		div { width:800px; position:relative; top:40px; }
+		img { width:80px; height:80px; float:left; border:10px solid #fff; margin:4px 4px 0 0; transition:0.3s; border-radius:50%; }
+		.active {border:10px solid green;border-radius:20%;-webkit-transform:scale(1.2); }
+		img:hover { -webkit-transform:scale(1.2); }
+	</style>
+	<script>
+		window.onload = function(){
+
+			(function(){
+
+				var arrImg = [
+					'img-1/1.jpg',
+					'img-1/1.png',
+					'img-1/2.jpg',
+					'img-1/2.png',
+					'img-1/3.jpg',
+					'img-1/3.png',
+					'img-1/11.jpg',
+					'img-1/22.jpg',
+					'img-1/33.jpg',
+					'img-1/4.jpg',
+					'img-1/pic.jpg'
+					],
+					oDiv = document.getElementsByTagName('div')[0],
+					aInput = document.getElementsByTagName('input'),
+					aImg = document.getElementsByTagName('img'),
+					iNum = 0,
+					str = '';
+
+				aInput[0].onclick =function(){
+					fnClear();
+					oDiv.innerHTML += '<img src="'+ arrImg[iNum%arrImg.length] +'" alt="">';
+					iNum++;
+				};
+
+				aInput[1].onclick =function(){
+					fnClear();
+					for(var i=0; i<aImg.length; i+=2){
+						aImg[i].className = 'active';
+					}
+				};
+
+				aInput[2].onclick =function(){
+					fnClear();
+					for(var i=1; i<aImg.length; i+=2){
+						aImg[i].className = 'active';
+					}
+				};
+
+				aInput[3].onclick =function(){
+					fnClear();
+					for(var i=0; i<aImg.length; i++){
+						if(Math.floor(i/7)%2 == 0){
+							aImg[i].className = 'active';
+						}
+					}
+				};
+
+				aInput[4].onclick =function(){
+					fnClear();
+					for(var i=0; i<aImg.length; i++){
+						if(Math.floor(i/7)%2){
+							aImg[i].className = 'active';
+						}
+					}
+				};
+
+				aInput[5].onclick =function(){
+					fnClear();
+					for(var i=0; i<aImg.length; i++){
+						if(i%7%2 == 0){
+							aImg[i].className = 'active';
+						}
+					}
+				};
+
+				aInput[6].onclick =function(){
+					fnClear();
+					for(var i=0; i<aImg.length; i++){
+						if(i%7%2){
+							aImg[i].className = 'active';
+						}
+					}
+				};
+
+				function fnClear(){
+					for(var i=0; i<aImg.length; i++){
+						aImg[i].className = '';
+					}
+				}
+
+			})();
+
+		};
+	</script>
+</head>
+
+<body>
+<input type="button" value="生成1张图片" />
+<input type="button" value="奇数" />
+<input type="button" value="偶数" />
+<input type="button" value="奇数横排" />
+<input type="button" value="偶数横排" />
+<input type="button" value="奇数竖排" />
+<input type="button" value="偶数竖排" />
+
+<div>
+	<img src="img-1/1.jpg" />
+	<img src="img-1/1.png" />
+	<img src="img-1/2.jpg" />
+	<img src="img-1/2.png" />
+	<img src="img-1/3.jpg" />
+	<img src="img-1/3.png" />
+	<img src="img-1/2.jpg" />
+	<img src="img-1/2.png" />
+	<img src="img-1/3.jpg" />
+	<img src="img-1/3.png" />
+	<img src="img-1/2.jpg" />
+	<img src="img-1/2.png" />
+	<img src="img-1/3.jpg" />
+	<img src="img-1/3.png" />
+	<img src="img-1/2.jpg" />
+	<img src="img-1/2.png" />
+	<img src="img-1/3.jpg" />
+	<img src="img-1/3.png" />
+</div>
+</body>
+</html>

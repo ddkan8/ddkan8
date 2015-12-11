@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>作业2-QQ号码</title>
+	<script>
+		window.onload = function(){
+
+			(function(){
+
+				var aInput = document.getElementsByTagName('input');
+
+				aInput[1].onclick = function(){
+					if (aInput[0].value == ''){
+						alert('1. 没有输入内容');
+					}else if(isNaN(aInput[0].value)){
+						alert('2. 输入内容不是数字');
+					}else if(aInput[0].value.charAt(0) == 0){
+						alert('3. 输入内容不能以0开头');
+					}else if(parseFloat(aInput[0].value) !== parseInt(aInput[0].value) || aInput[0].value.indexOf('.') != -1){
+						alert('4. 输入内容不能是小数');
+					}else if(aInput[0].value.length < 5 || aInput[0].value.length > 10){
+						alert('5. 输入的数字必须在5位以上、10位以内');
+					}else{
+						alert('有效的QQ号码')
+					}
+				};
+
+			})();
+
+		};
+	</script>
+</head>
+
+<body>
+请输入QQ号码：<input type="text" />
+<input type="button" value="判断" />
+<br />
+1、有没有输入<br />
+2、输入的是不是数字<br />
+3、不能有0在前面<br />
+4、不能是小数<br />
+5、输入的数字必须在5位以上、10位以内<br />
+</body>
+</html>

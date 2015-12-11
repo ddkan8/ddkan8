@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="miaov.min.js"></script>
+  <script>
+    window.onload = function(){
+
+      var aDiv = document.getElementsByTagName('div'),
+          iNum = 0,
+          timer = null,
+          finished = false,
+          flag = true,
+          len = 20,
+          str = '';
+      for(var i=0; i<len; i++){
+        str += '<div style="position:absolute;top:0;left:'+ i*60 +'px;width:50px;height:50px;background-color:#f00;"></div>';
+      }
+      document.body.innerHTML = str;
+
+      document.onclick = function(){
+        if(finished){return};
+        finished = true;
+        clearInterval(timer);
+        timer = setInterval(function(){
+          doMove(aDiv[iNum], 'top', 23, flag ? 400 : 0, iNum == len - 1 ? function(){
+            finished = false;
+            flag = !flag;
+          } : null);
+          iNum++;
+          if(iNum == len){
+            clearInterval(timer);
+            iNum = 0;
+          }
+        }, 100);
+
+      };
+
+    };
+  </script>
+</head>
+
+<body>
+
+</body>
+</html>

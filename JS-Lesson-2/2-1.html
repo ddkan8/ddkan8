@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#box{
+			position: relative;
+			width: 510px;
+			height: 510px;
+			background-color: #f1f1f1;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			(function(){
+				var oBox = document.getElementById('box');
+				var aDiv = oBox.getElementsByTagName('div');
+				var len = 100;
+				var str = '';
+
+				for(var i=0; i<len; i++){
+
+					str += '<div style="left:'+ (i%10)*51 +'px;top:'+ Math.floor(i/10)*51 +'px;position:absolute;border-right:1px solid #f1f1f1;border-bottom:1px solid #f1f1f1;width: 50px;height: 50px;background-color:#f1f1f1;"></div>';
+				}
+				oBox.innerHTML = str;
+				oBox.style.background = 'url(img-1/pic.jpg) no-repeat';
+
+				for(var i=0; i<aDiv.length; i++){
+					aDiv[i].onmousemove = function(){
+						this.style.backgroundColor = 'inherit';
+					};
+				}
+
+			})();
+		};
+	</script>
+</head>
+
+<body>
+<div id="box"></div>
+</body>
+</html>
